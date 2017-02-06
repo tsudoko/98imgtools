@@ -1,0 +1,6 @@
+__pycache__
+
+*.bin
+*.hdi
+*.nhd
+*.slh
