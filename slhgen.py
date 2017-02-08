@@ -8,19 +8,19 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--serial-number", default='')
 parser.add_argument("--revision", default='')
 parser.add_argument("--model-name", default='')
+parser.add_argument("--sectorsize", type=int, default=512)
 parser.add_argument("--size", type=int, required=True, help="size of the raw image in bytes")
 parser.add_argument("cylinders", type=int)
 parser.add_argument("heads", type=int)
 parser.add_argument("sectors", type=int)
 args = parser.parse_args()
 
-sectorsize = 512
 header = slh.header.pack(
     magic=b"HDIM",
     cylinders=args.cylinders,
     heads=args.heads,
     sectors=args.sectors,
-    sectorsize=sectorsize,
+    sectorsize=args.sectorsize,
     size=args.size,
     serial_number=args.serial_number.encode("ascii"),
     revision=args.revision.encode("ascii"),

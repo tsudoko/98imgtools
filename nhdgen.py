@@ -8,6 +8,7 @@ from formats import nhd
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--comment", default='')
+parser.add_argument("--sectorsize", type=int, default=512)
 parser.add_argument("cylinders", type=int)
 parser.add_argument("heads", type=int)
 parser.add_argument("sectors", type=int)
@@ -17,7 +18,6 @@ if len(args.comment) >= 256:
     print("comment too long", file=sys.stderr)
     exit(1)
 
-sectorsize = 512
 header = nhd.header.pack(
     magic=b"T98HDDIMAGE.R0",
     comment=args.comment.encode("cp932"),
@@ -25,6 +25,6 @@ header = nhd.header.pack(
     cylinders=args.cylinders,
     heads=args.heads,
     sectors=args.sectors,
-    sectorsize=sectorsize
+    sectorsize=args.sectorsize
 )
 sys.stdout.buffer.write(header)
