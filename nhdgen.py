@@ -11,7 +11,6 @@ parser.add_argument("--comment", default='')
 parser.add_argument("cylinders", type=int)
 parser.add_argument("heads", type=int)
 parser.add_argument("sectors", type=int)
-parser.add_argument("infile")
 args = parser.parse_args()
 
 if len(args.comment) >= 256:
