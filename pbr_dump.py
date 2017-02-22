@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
-import sys
+import argparse
 import os
 
 import utils
 
-SECTOR_SIZE = 512
+parser = argparse.ArgumentParser()
+parser.add_argument("--sectorsize", type=int, default=512)
+parser.add_argument("infile")
+args = parser.parse_args()
 
 common_fields = [
     ('jump', '3s'),
@@ -53,12 +56,12 @@ fat32_pbr_t = utils.NamedStruct(common_fields + f32_fields, '<')
 
 cylinders = lambda size, pbr: size / (pbr.sectorsize * pbr.heads * pbr.sectors)
 
-with open(sys.argv[1], "rb") as f:
-    size = os.path.getsize(sys.argv[1])
+with open(args.infile, "rb") as f:
+    size = os.path.getsize(args.infile)
     match = None
 
     while match is None:
-        sector = f.read(SECTOR_SIZE)
+        sector = f.read(args.sectorsize)
         fat16_pbr = fat16_pbr_t.unpack(sector[:fat16_pbr_t.size])
         fat32_pbr = fat32_pbr_t.unpack(sector[:fat32_pbr_t.size])
 
