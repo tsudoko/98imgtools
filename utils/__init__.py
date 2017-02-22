@@ -5,7 +5,7 @@ from collections import namedtuple
 
 class NamedStruct(struct.Struct):
     def __init__(self, fields, order='', size=0):
-        self.values = namedtuple("NamedStruct", ' '.join(k for k, _ in fields))
+        self.values = namedtuple("NamedStruct", ' '.join(k for k, v in fields if 'x' not in v))
         format = order + ''.join([v for _, v in fields])
 
         if size:
