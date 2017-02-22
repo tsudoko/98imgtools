@@ -73,4 +73,5 @@ with open(args.infile, "rb") as f:
     if match:
         utils.dump(match._asdict())
         print()
+        print("offset:", f.tell() - args.sectorsize)
         print("cylinders (calculated):", cylinders(size, match))
