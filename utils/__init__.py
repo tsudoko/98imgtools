@@ -6,6 +6,7 @@ from collections import namedtuple
 class NamedStruct(struct.Struct):
     def __init__(self, fields, order='', size=0):
         self.values = namedtuple("NamedStruct", ' '.join(k for k, v in fields if 'x' not in v))
+        self.fields = fields
         format = order + ''.join([v for _, v in fields])
 
         if size:
@@ -14,10 +15,32 @@ class NamedStruct(struct.Struct):
         super().__init__(format)
 
     def pack(self, *args, **kwargs):
-        return super().pack(*self.values(*args, **kwargs))
+        values = self.values(*args, **kwargs)
+        ret = []
+
+        for v in values:
+            if isinstance(v, tuple):
+                ret.append(*v)
+            else:
+                ret.append(v)
+
+        return super().pack(*ret)
 
     def unpack(self, data):
-        return self.values._make(super().unpack(data))
+        offset = 0
+        values = []
+
+        for _, _type in self.fields:
+            v = struct.unpack_from(_type, data, offset)
+
+            if len(v) > 1:
+                values.append(v)
+            else:
+                values.append(*v)
+
+            offset += struct.calcsize(_type)
+
+        return self.values._make(values)
 
 
 # does not handle:
