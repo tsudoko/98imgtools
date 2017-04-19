@@ -35,7 +35,7 @@ class NamedStruct(struct.Struct):
 
             if len(v) > 1:
                 values.append(v)
-            else:
+            elif v:
                 values.append(*v)
 
             offset += struct.calcsize(_type)
