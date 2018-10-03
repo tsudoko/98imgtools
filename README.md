@@ -16,7 +16,7 @@ Display header information from an HDD hard drive image file.
 Verifies magic values in header.
 
 ### `hddgen.py`
-Creates a new blank HDD image file to the user's specifications.
+Creates a new blank HDD image header to the user's specifications. Blank space is not allocated.
 
 ### `hdidump.py`
 Display header information from an HDI hard drive image file.
@@ -27,10 +27,10 @@ Display header information from an NHD hard drive image file.
 Verifies magic values in header.
 
 ### `nhdgen.py`
-Creates a new blank NHD image file to the user's specifications.
+Creates a new blank NHD image header to the user's specifications. Blank space is not allocated.
 
 ### `pbr_dump.py`
-Tries to identify partitions in a disk image.
+Dumps the boot sector of the first partition found in the provided disk image.
 
 ### `slhdump.py`
 Display header information from an SLH hard drive image file.
@@ -38,4 +38,4 @@ Display header information from an SLH hard drive image file.
 Verifies magic values in header.
 
 ### `slhgen.py`
-Creates a new blank HDD image file to the user's specifications.
+Creates a new blank SLH image header to the user's specifications. Blank space is not allocated.
