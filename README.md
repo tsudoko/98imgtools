@@ -45,7 +45,7 @@ Verifies magic values in header.
 Creates a new blank NHD image header to the user's specifications. Blank space is not allocated.
 
 ### `pbr_dump.py`
-Dumps the boot sector of the first partition found in the provided disk image.
+Dumps the boot sector of the first FAT partition found in the provided disk image.
 
 ### `slhdump.py`
 Display header information from an SLH hard drive image file.
