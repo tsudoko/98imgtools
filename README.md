@@ -15,10 +15,10 @@ Mount a HDI image:
 Supported formats
 -----------------
 
- * HDD
- * HDI
- * NHD
- * SLH
+ * HDD (Virtual98)
+ * HDI (Anex86)
+ * NHD (T98-Next)
+ * SLH (SL9821)
 
 See [`formats`](formats/) for the various format structures.
 
